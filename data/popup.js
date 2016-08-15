@@ -10,3 +10,11 @@ submitBtn.addEventListener('click', function(){
   var text = textInput.value.replace(/(\r\n|\n|\r)/gm,"");
   self.port.emit("save", text);
 });
+
+self.port.on("text", function(text) {
+  textInput.value = text;
+});
+
+self.port.on("set", function(state) {
+  enabledSwitch.checked = state;
+});

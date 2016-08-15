@@ -1,8 +1,26 @@
 var self = require("sdk/self");
 var buttons = require('sdk/ui/button/toggle');
 var tabs = require("sdk/tabs");
+var ss = require("sdk/simple-storage");
 var replaceText = "Wixxer";
 var enabled = true;
+
+var popup = require("sdk/panel").Panel({
+  contentURL: self.data.url("popup.html"),
+  contentScriptFile: self.data.url("popup.js"),
+  onHide: handleHide
+});
+
+if (typeof ss.storage.replaceText != 'undefined'){
+  replaceText = ss.storage.replaceText;
+}
+
+if (typeof ss.storage.replaceEnabled != 'undefined'){
+  enabled = ss.storage.replaceEnabled;
+}
+
+popup.port.emit("text", replaceText);
+popup.port.emit("set", enabled);
 
 var button = buttons.ToggleButton({
   id: "ibm",
@@ -26,21 +44,16 @@ tabs.on('ready', function(tab) {
    }
 });
 
-var popup = require("sdk/panel").Panel({
-  contentURL: self.data.url("popup.html"),
-  contentScriptFile: self.data.url("popup.js"),
-  onHide: handleHide
-});
-
 popup.port.on("save", function(text) {
   replaceText = text;
+  ss.storage.replaceText = text;
   popup.hide();
   tabs.activeTab.reload();
 });
 
 popup.port.on("state", function(state) {
   enabled = state;
-  console.log(state);
+  ss.storage.replaceEnabled = state;
   tabs.activeTab.reload();
 });
 
