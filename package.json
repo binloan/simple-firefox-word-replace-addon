@@ -1,0 +1,15 @@
+{
+  "title": "Wer ist der Wixxer?",
+  "name": "wixxer-addon",
+  "version": "0.0.1",
+  "description": "Kennst du den Wixxer? Ich auch nicht.",
+  "main": "index.js",
+  "author": "Jonathan Berner",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ]
+}
