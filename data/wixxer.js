@@ -1,5 +1,4 @@
-// Walk the dom looking for the given text in text nodes
-walk(document);
+var textContent = "Wixxer";
 // Our walker function
 function walk(node) {
   var child, next;
@@ -22,5 +21,11 @@ function walk(node) {
 }
 
 function handleText(textNode) {
-  textNode.nodeValue = textNode.nodeValue.replace(/ibm/gi, "SAP");
+  textNode.nodeValue = textNode.nodeValue.replace(/ibm/gi, textContent);
 }
+
+self.port.on("replace", function(text) {
+  textContent = text;
+  // Walk the dom looking for the given text in text nodes
+  walk(document);
+});
