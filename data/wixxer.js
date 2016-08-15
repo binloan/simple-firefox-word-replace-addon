@@ -22,5 +22,5 @@ function walk(node) {
 }
 
 function handleText(textNode) {
-  textNode.nodeValue = textNode.nodeValue.replace(/ibm/gi, "Wixxer");
+  textNode.nodeValue = textNode.nodeValue.replace(/ibm/gi, "SAP");
 }
