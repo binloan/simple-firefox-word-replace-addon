@@ -32,7 +32,7 @@ popup.port.emit("set", enabled);
 
 var button = buttons.ToggleButton({
   id: "ibm",
-  label: "Kennst du den Wixxer?",
+  label: "Simple Replace Addon",
   icon: {
     "16": "./icon16.png",
     "48": "./icon48.png",
