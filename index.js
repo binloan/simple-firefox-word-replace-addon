@@ -3,6 +3,7 @@ var buttons = require('sdk/ui/button/toggle');
 var tabs = require("sdk/tabs");
 var ss = require("sdk/simple-storage");
 var replaceText = "Wixxer";
+var regText = "ibm";
 var enabled = true;
 
 var popup = require("sdk/panel").Panel({
@@ -19,7 +20,10 @@ if (typeof ss.storage.replaceEnabled != 'undefined'){
   enabled = ss.storage.replaceEnabled;
 }
 
-popup.port.emit("text", replaceText);
+popup.port.emit("text", {
+  regex: regText,
+  replace: replaceText
+});
 popup.port.emit("set", enabled);
 
 var button = buttons.ToggleButton({
