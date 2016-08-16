@@ -16,6 +16,10 @@ if (typeof ss.storage.replaceText != 'undefined'){
   replaceText = ss.storage.replaceText;
 }
 
+if (typeof ss.storage.regexText != 'undefined'){
+  regText = ss.storage.regexText;
+}
+
 if (typeof ss.storage.replaceEnabled != 'undefined'){
   enabled = ss.storage.replaceEnabled;
 }
@@ -44,13 +48,18 @@ tabs.on('ready', function(tab) {
     var worker = tab.attach({
        contentScriptFile: self.data.url("wixxer.js")
      });
-     worker.port.emit("replace", replaceText);
+     worker.port.emit("replace", {
+       regex: regText,
+       replace: replaceText
+     });
    }
 });
 
-popup.port.on("save", function(text) {
-  replaceText = text;
-  ss.storage.replaceText = text;
+popup.port.on("save", function(texts) {
+  replaceText = texts.replace;
+  regText = texts.regex;
+  ss.storage.replaceText = texts.replace;
+  ss.storage.regexText = texts.regex;
   popup.hide();
   tabs.activeTab.reload();
 });

@@ -1,4 +1,5 @@
 var textContent = "Wixxer";
+var regText = "ibm";
 // Our walker function
 function walk(node) {
   var child, next;
@@ -21,11 +22,12 @@ function walk(node) {
 }
 
 function handleText(textNode) {
-  textNode.nodeValue = textNode.nodeValue.replace(/ibm/gi, textContent);
+  textNode.nodeValue = textNode.nodeValue.replace(new RegExp(regText, "gi"), textContent);
 }
 
-self.port.on("replace", function(text) {
-  textContent = text;
+self.port.on("replace", function(texts) {
+  regText = texts.regex;
+  textContent = texts.replace;
   // Walk the dom looking for the given text in text nodes
   walk(document);
 });

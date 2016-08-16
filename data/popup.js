@@ -10,7 +10,10 @@ enabledSwitch.addEventListener('click', function(){
 submitBtn.addEventListener('click', function(){
   var regtext = textInputReg.value;
   var replacetext = textInputRep.value.replace(/(\r\n|\n|\r)/gm,"");
-  self.port.emit("save", text);
+  self.port.emit("save", {
+    regex: regtext,
+    replace: replacetext
+  });
 });
 
 self.port.on("text", function(texts) {
