@@ -1,10 +1,10 @@
 {
-  "title": "Wer ist der Wixxer?",
-  "name": "wixxer-addon",
+  "title": "Simple Firefox Word Replace",
+  "name": "replace-addon",
   "version": "0.0.1",
-  "description": "Kennst du den Wixxer? Ich auch nicht.",
+  "description": "Takes any regex and searches for it in the document and then replaces it with the word you provided.",
   "main": "index.js",
-  "author": "Jonathan Berner",
+  "author": "binux",
   "engines": {
     "firefox": ">=38.0a1"
   },
